@@ -6,7 +6,7 @@
 /*   By: davidma2 <davidma2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:12:33 by davidma2          #+#    #+#             */
-/*   Updated: 2024/10/21 10:33:11 by davidma2         ###   ########.fr       */
+/*   Updated: 2024/10/21 10:44:50 by davidma2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,4 @@ size_t	ft_strlen(const char *str)
 		cont0++;
 	return (cont0);
 }
+
