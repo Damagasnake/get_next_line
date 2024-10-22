@@ -6,7 +6,7 @@
 /*   By: davidma2 <davidma2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:11:35 by davidma2          #+#    #+#             */
-/*   Updated: 2024/10/22 11:17:54 by davidma2         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:19:41 by davidma2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ ssize_t	read(int fd, void buf[.count], size_t count)
 
 char	*get_next_line(int fd)
 {
+	#define BUFFER_SIZE 42
 	char	*res;
 	char	buffer[BUFFER_SIZE];
 	ssize_t	bytesr;
 
-#define BUFFER_SIZE 42
-	index = 0;
+
 	bytesr = read(fd, buffer, BUFFER_SIZE);
 	res = (char *)malloc((bytesr + 1) * sizeof(char));
 	if (!res)
