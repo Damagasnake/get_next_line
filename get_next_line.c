@@ -6,7 +6,7 @@
 /*   By: davidma2 <davidma2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:11:35 by davidma2          #+#    #+#             */
-/*   Updated: 2024/10/22 11:19:41 by davidma2         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:49:30 by davidma2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,8 @@ static void	free_space(char **res, int index)
 	free(res);
 }
 
-ssize_t	read(int fd, void buf[.count], size_t count)
-{
-	ssize_t	i;
-
-	i = 0;
-}
-
 char	*get_next_line(int fd)
 {
-	#define BUFFER_SIZE 42
 	char	*res;
 	char	buffer[BUFFER_SIZE];
 	ssize_t	bytesr;
