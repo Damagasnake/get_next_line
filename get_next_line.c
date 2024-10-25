@@ -6,7 +6,7 @@
 /*   By: davidma2 <davidma2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:11:35 by davidma2          #+#    #+#             */
-/*   Updated: 2024/10/25 10:52:09 by davidma2         ###   ########.fr       */
+/*   Updated: 2024/10/25 12:58:29 by davidma2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,13 @@ static char *returnline(char *buf)
 			}
 			newline[i] = '\0';
 }
+static char *newbuffer(char *buf)
+{
+	char secondBuffer;
+	size_t i;
+	size_t j;
 
+	i = 0;
+	j = 0;
+	while(buf[i] )
+}
