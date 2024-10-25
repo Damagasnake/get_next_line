@@ -6,13 +6,13 @@
 /*   By: davidma2 <davidma2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:11:35 by davidma2          #+#    #+#             */
-/*   Updated: 2024/10/24 13:03:49 by davidma2         ###   ########.fr       */
+/*   Updated: 2024/10/25 10:52:09 by davidma2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void	free_space(char *res, int index)
+/*static void	free_space(char *res, int index)
 {
 	while (index >= 0)
 		free(res[index--]);
@@ -38,3 +38,30 @@ char	*get_next_line(int fd)
 	}
 	res[i] = '\0';
 }
+*/
+static char *returnline(char *buf)
+{
+	char *newline;
+	size_t i;
+	
+	i = 0;
+	if (!buf)
+		return(NULL);
+	while (buf[i] && buf[i] != '\0')
+		i++;
+		if(buf == '\n')
+			newline = (char *)malloc(i + 2 * sizeof(char));
+	else
+		newline = (char *)malloc(i + 1 * sizeof(char));
+	if(!newline)
+		return(NULL);
+	while(buf[i] && buf[i] != '\n')
+		newline[i] = buf[i];
+			if (buf[i] == '\n')
+			{
+				newline[i] = '\n';
+				i++;
+			}
+			newline[i] = '\0';
+}
+
