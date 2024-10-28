@@ -6,7 +6,7 @@
 /*   By: davidma2 <davidma2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:11:35 by davidma2          #+#    #+#             */
-/*   Updated: 2024/10/28 13:57:12 by davidma2         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:12:28 by davidma2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,32 @@ static char *returnline(char *buf)
 {
 	char *newline;
 	size_t i;
+	size_t j;
 	
 	i = 0;
 	if (!buf)
 		return(NULL);
-	while (buf[i] && buf[i] != '\0')
+	while (buf[i] && buf[i] != '\n')
 		i++;
-		if(buf == '\n')
-			newline = (char *)malloc(i + 2 * sizeof(char));
+	if (buf[i] == '\n')
+		newline = (char *)malloc((i + 2) * sizeof(char));
 	else
-		newline = (char *)malloc(i + 1 * sizeof(char));
-	if(!newline)
+		newline = (char *)malloc((i + 1) * sizeof(char));
+	if (!newline)
 		return(NULL);
-	while(buf[i] && buf[i] != '\n')
-		newline[i] = buf[i];
-			if (buf[i] == '\n')
-			{
-				newline[i] = '\n';
-				i++;
-			}
-			newline[i] = '\0';
+	j = 0;
+	while (j < i)
+	{
+		newline[j] = buf[j];
+		j++;
+	}
+	if (buf[i] == '\n')
+	{
+		newline[j] = '\n';
+		j++;
+	}
+	newline[j] = '\0';
+	return (newline);
 }
 static char *nextbuff(char *buf)
 {
