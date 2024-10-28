@@ -6,7 +6,7 @@
 /*   By: davidma2 <davidma2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:11:35 by davidma2          #+#    #+#             */
-/*   Updated: 2024/10/25 12:58:29 by davidma2         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:57:12 by davidma2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,31 @@ static char *returnline(char *buf)
 			}
 			newline[i] = '\0';
 }
-static char *newbuffer(char *buf)
+static char *nextbuff(char *buf)
 {
-	char secondBuffer;
+	char *secondBuffer;
 	size_t i;
 	size_t j;
-
+	
 	i = 0;
+	while (buf[i] && buf[i] != '\n')
+		i++;
+	if (!buf[i])
+	{
+		free(buf);
+		return(NULL);
+	}
+	secondBuffer = (char *)malloc(ft_strlen(buf) - i);
+	if (!secondBuffer)
+	{
+		free(secondBuffer);
+		return(NULL);
+	}
+	i++;
 	j = 0;
-	while(buf[i] )
+	while (buf[i])
+		secondBuffer[j++] = buf[i++];
+	secondBuffer[j] = '\0';
+	free(buf);
+	return(secondBuffer);
 }
