@@ -20,5 +20,5 @@
 # include <stdlib.h>
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *str);
-//static void	free_space(char *res, int index)
+
 #endif
