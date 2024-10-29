@@ -21,4 +21,27 @@ size_t	ft_strlen(const char *str)
 		cont0++;
 	return (cont0);
 }
+char *ft_strjoin(char const *s1, char const *s2)
+{
+	size_t len1= strlen(s1);
+	size_t len2 = strlen(s2);
+	char *result = malloc(len1 + len2 + 1);
+	if (!result)
+		return NULL;
+	strcpy(result, s1);
+	strcat(result, s2);
+	return result;
+}
 
+char *ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == (char)c)
+			return (char *)s;
+		s++;
+	}
+	if (c == '\0')
+		return (char *)s;
+	return NULL;
+}
