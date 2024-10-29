@@ -6,7 +6,7 @@
 /*   By: davidma2 <davidma2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:11:35 by davidma2          #+#    #+#             */
-/*   Updated: 2024/10/28 14:12:28 by davidma2         ###   ########.fr       */
+/*   Updated: 2024/10/29 10:20:54 by davidma2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ static char *returnline(char *buf)
 	i = 0;
 	if (!buf)
 		return(NULL);
-	while (buf[i] && buf[i] != '\n')
-		i++;
+	while (buf[i++] && buf[i++] != '\n')
 	if (buf[i] == '\n')
 		newline = (char *)malloc((i + 2) * sizeof(char));
 	else
@@ -63,10 +62,7 @@ static char *returnline(char *buf)
 		j++;
 	}
 	if (buf[i] == '\n')
-	{
-		newline[j] = '\n';
-		j++;
-	}
+		newline[j++] = '\n';
 	newline[j] = '\0';
 	return (newline);
 }
@@ -77,8 +73,7 @@ static char *nextbuff(char *buf)
 	size_t j;
 	
 	i = 0;
-	while (buf[i] && buf[i] != '\n')
-		i++;
+	while (buf[i++] && buf[i++] != '\n')
 	if (!buf[i])
 	{
 		free(buf);
@@ -87,6 +82,7 @@ static char *nextbuff(char *buf)
 	secondBuffer = (char *)malloc(ft_strlen(buf) - i);
 	if (!secondBuffer)
 	{
+		free(buf);
 		free(secondBuffer);
 		return(NULL);
 	}
@@ -98,3 +94,4 @@ static char *nextbuff(char *buf)
 	free(buf);
 	return(secondBuffer);
 }
+static char joinbuf()
