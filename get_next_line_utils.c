@@ -28,8 +28,8 @@ char *ft_strjoin(char const *s1, char const *s2)
 	char *result = malloc(len1 + len2 + 1);
 	if (!result)
 		return NULL;
-	strcpy(result, s1);
-	strcat(result, s2);
+	ft_strcpy(result, s1);
+	ft_strcat(result, s2);
 	return result;
 }
 
