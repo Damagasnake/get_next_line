@@ -11,37 +11,42 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdlib.h>
+#include <string.h>
 
-size_t	ft_strlen(const char *str)
+size_t ft_strlen(const char *str)
 {
-	int	cont0;
-
-	cont0 = 0;
-	while (str[cont0] != '\0')
-		cont0++;
-	return (cont0);
-}
-char *ft_strjoin(char const *s1, char const *s2)
-{
-	size_t len1= strlen(s1);
-	size_t len2 = strlen(s2);
-	char *result = malloc(len1 + len2 + 1);
-	if (!result)
-		return NULL;
-	ft_strcpy(result, s1);
-	ft_strcat(result, s2);
-	return result;
+    size_t len = 0;
+    while (str[len])
+        len++;
+    return len;
 }
 
 char *ft_strchr(const char *s, int c)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-			return (char *)s;
-		s++;
-	}
-	if (c == '\0')
-		return (char *)s;
-	return NULL;
+    while (*s)
+    {
+        if (*s == (char)c)
+            return (char *)s;
+        s++;
+    }
+    if (c == '\0')
+        return (char *)s;
+    return NULL;
+}
+
+char *ft_strjoin(char *s1, const char *s2)
+{
+    size_t len1 = s1 ? ft_strlen(s1) : 0;
+    size_t len2 = ft_strlen(s2);
+    char *result = malloc(len1 + len2 + 1);
+    if (!result)
+        return NULL;
+    if (s1)
+    {
+        strcpy(result, s1);
+        free(s1);
+    }
+    strcpy(result + len1, s2);
+    return result;
 }
