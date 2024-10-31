@@ -85,7 +85,7 @@ char *get_next_line(int fd)
 		temp_buffer[bytes_read] = '\0';
 		buffer = ft_strjoin(buffer, temp_buffer);
 		if (ft_strchr(buffer, '\n'))
-			brºeak ;
+			break ;
 	}
 	if (bytes_read < 0 || (bytes_read == 0 && (!buffer || !*buffer)))
 		return (NULL);
