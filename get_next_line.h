@@ -18,6 +18,7 @@
 # endif
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 size_t	ft_strlen(const char *str);
 char *ft_strjoin(char *s1, const char *s2);
 char *ft_strchr(const char *s, int c);

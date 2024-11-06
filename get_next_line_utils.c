@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
-#include <string.h>
 
 size_t ft_strlen(const char *str)
 {
@@ -47,6 +45,6 @@ char *ft_strjoin(char *s1, const char *s2)
         strcpy(result, s1);
         free(s1);
     }
-    strcpy(result + len1, s2);
+    ft_strcpy(result + len1, s2);
     return result;
 }

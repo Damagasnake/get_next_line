@@ -11,7 +11,10 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+#include <stddef.h>
 #include <stdlib.h>
+#include <unistd.h>
 static char *returnline(char *buf)
 {
 	char *newline;
