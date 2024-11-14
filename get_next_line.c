@@ -15,84 +15,104 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
-static char *returnline(char *buf)
+char	*get_next_line(int fd)
 {
-	char *newline;
-	size_t i;
-	size_t j;
+	static char	*bytesr;
+	char		*line;
+	char		*buffer;
 
-	i = 0;
-	if (!buf)
-		return(NULL);
-		i++;
-	if (buf[i] == '\n')
-		newline = (char *)malloc((i + 2) * sizeof(char));
-	else
-		newline = (char *)malloc((i + 1) * sizeof(char));
-	if (!newline)
-		return(NULL);
-	j = 0;
-	while (j < i)
+	line = NULL;
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		newline[j] = buf[j];
-	while (buf[i] && buf[i] != '\n')
-		j++;
-	}
-	if (buf[i] == '\n')
-	{
-		newline[j] = '\n';
-		j++;
-	}
-	newline[j] = '\0';
-	return (newline);
-}
-static char *nextbuff(char *buf)
-{
-	char *secondBuffer;
-	size_t i;
-	size_t j;
-
-	i = 0;
-	while (buf[i] && buf[i] != '\n')
-		i++;
-	if (!buf[i])
-	{
-		free(buf);
-		return(NULL);
-	}
-	secondBuffer = (char *)malloc(ft_strlen(buf) - i);
-	if (!secondBuffer)
-	{
-		free(secondBuffer);
-		return(NULL);
-	}
-	i++;
-	j = 0;
-	while (buf[i])
-		secondBuffer[j++] = buf[i++];
-	secondBuffer[j] = '\0';
-	free(buf);
-	return(secondBuffer);
-}
-char *get_next_line(int fd)
-{
-	static char *buffer;
-	char *newline;
-	char temp_buffer[BUFFER_SIZE + 1];
-	ssize_t bytes_read;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
+		free(bytesr);
+		free(buffer);
+		bytesr = NULL;
+		buffer = NULL;
 		return (NULL);
-	while ((bytes_read = read(fd, temp_buffer, BUFFER_SIZE)) > 0)
+	}
+	if (!buffer)
+		return (NULL);
+	bytesr = bytesr_filling(fd, bytesr, buffer);
+	if (*bytesr == 0)
 	{
-		temp_buffer[bytes_read] = '\0';
-		buffer = ft_strjoin(buffer, temp_buffer);
-		if (ft_strchr(buffer, '\n'))
+		free (bytesr);
+		return (bytesr = 0);
+	}
+	line = extract_line(bytesr, line);
+	bytesr = extract_new_bytesr(bytesr);
+	return (line);
+}
+char	*bytesr_filling(int fd, char *bytesr, char *buffer)
+{
+	ssize_t	nbytes;
+
+	nbytes = 1;
+	if (!bytesr)
+		bytesr = ft_strdup("");
+	while (nbytes > 0)
+	{
+		nbytes = read(fd, buffer, BUFFER_SIZE);
+		if (nbytes == -1)
+		{
+			free (buffer);
+			return (NULL);
+		}
+		buffer[nbytes] = 0;
+		bytesr = ft_strjoin (bytesr, buffer);
+		if ((ft_strchr(buffer, '\n')))
 			break ;
 	}
-	if (bytes_read < 0 || (bytes_read == 0 && (!buffer || !*buffer)))
+	free (buffer);
+	return (bytesr);
+}
+char	*extract_new_bytesr(char	*bytesr)
+{
+	int		len;
+	int		i;
+	char	*new_bytesr;
+
+	len = 0;
+	i = 0;
+	if (bytesr == NULL)
 		return (NULL);
-	newline = returnline(buffer);
-	buffer = nextbuff(buffer);
-	return (newline);
+	while (bytesr[len] != '\n' && bytesr[len])
+		len++;
+	if (bytesr[len] == '\n')
+		len++;
+	new_bytesr = malloc((ft_strlen(bytesr) - len + 1) * sizeof(char));
+	if (!new_bytesr)
+		return (NULL);
+	while (bytesr[len + i])
+	{
+		new_bytesr[i] = bytesr[len + i];
+		i++;
+	}
+	free (bytesr);
+	new_bytesr[i] = 0;
+	return (new_bytesr);
+}
+char	*extract_line(char *bytesr, char *line)
+{
+	int	len;
+	int	i;
+
+	len = 0;
+	i = 0;
+	if (bytesr == NULL)
+		return (NULL);
+	while (bytesr[len] != '\n' && bytesr[len])
+		len++;
+	if (bytesr[len] == '\n')
+		len++;
+	line = malloc((len + 1) * sizeof(char));
+	if (!line)
+		return (NULL);
+	while (i < len)
+	{
+		line[i] = bytesr[i];
+		i++;
+	}
+	line[i] = 0;
+	return (line);
 }
