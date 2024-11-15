@@ -1,1 +1,8 @@
 # ninja log v6
+6	277	1730997247268187622	CMakeFiles/get_next_line.dir/get_next_line.c.o	8a353e8f25608c86
+1	80	1731587418691315507	CMakeFiles/get_next_line.dir/get_next_line.c.o	8a353e8f25608c86
+2	58	1731587505186253243	CMakeFiles/get_next_line.dir/get_next_line_test.c.o	e50de756984381ee
+1	59	1731587505185557157	CMakeFiles/get_next_line.dir/get_next_line.c.o	8a353e8f25608c86
+1	234	1731591152451023746	CMakeFiles/get_next_line.dir/get_next_line.c.o	8a353e8f25608c86
+1	234	1731591152451666870	CMakeFiles/get_next_line.dir/get_next_line_utils.c.o	b0980f414135f40b
+1	234	1731591152451799912	CMakeFiles/get_next_line.dir/get_next_line_test.c.o	e50de756984381ee

@@ -6,15 +6,17 @@
 /*   By: davidma2 <davidma2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:11:35 by davidma2          #+#    #+#             */
-/*   Updated: 2024/10/28 14:12:28 by davidma2         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:53:43 by davidma2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/fcntl.h>
+#include <stdio.h>
+
 char	*get_next_line(int fd)
 {
 	static char	*bytesr;
@@ -23,7 +25,7 @@ char	*get_next_line(int fd)
 
 	line = NULL;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		free(bytesr);
 		free(buffer);
@@ -53,7 +55,7 @@ char	*bytesr_filling(int fd, char *bytesr, char *buffer)
 	while (nbytes > 0)
 	{
 		nbytes = read(fd, buffer, BUFFER_SIZE);
-		if (nbytes == -1)
+		if (nbytes < 0)
 		{
 			free (buffer);
 			return (NULL);
@@ -89,7 +91,7 @@ char	*extract_new_bytesr(char	*bytesr)
 		i++;
 	}
 	free (bytesr);
-	new_bytesr[i] = 0;
+	new_bytesr[i] = '\0';
 	return (new_bytesr);
 }
 char	*extract_line(char *bytesr, char *line)
@@ -113,6 +115,24 @@ char	*extract_line(char *bytesr, char *line)
 		line[i] = bytesr[i];
 		i++;
 	}
-	line[i] = 0;
+	line[i] = '\0';
 	return (line);
 }
+
+int main()
+{
+	int fd;
+	char *line;
+
+	fd = open("hola.txt", O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return 0;
+}
+
