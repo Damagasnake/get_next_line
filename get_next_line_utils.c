@@ -29,7 +29,7 @@ char *ft_strjoin(char *s1, const char *s2)
 
     i = 0;
     j = 0;
-    mem = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) *sizeof(char));
+    mem = (char *)malloc((ft_strlen(s1) + ft_strlen(s2 + 1) *sizeof(char));
     if(!mem)
         return (NULL);
     while (s1[i])
